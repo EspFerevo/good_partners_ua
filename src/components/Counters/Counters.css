@@ -1,0 +1,104 @@
+.counters {
+  background-color: var(--color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.counters::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(20, 156, 184, 0.05) 0%, rgba(20, 156, 184, 0) 70%);
+  z-index: 1;
+}
+
+.counters .container {
+  position: relative;
+  z-index: 2;
+}
+
+.counters__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-2xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.counter:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.counter__value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
+  position: relative;
+}
+
+.counter__suffix {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+.counter__title {
+  font-size: var(--font-size-md);
+  color: var(--color-secondary);
+  margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .counters__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+  }
+
+  .counter__value {
+    font-size: 3rem;
+  }
+
+  .counter__suffix {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .counters__grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .counter {
+    padding: var(--spacing-lg);
+  }
+
+  .counter__value {
+    font-size: 2.5rem;
+  }
+
+  .counter__suffix {
+    font-size: 1.8rem;
+  }
+
+  .counter__title {
+    font-size: var(--font-size-sm);
+  }
+}

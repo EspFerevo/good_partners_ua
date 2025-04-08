@@ -1,0 +1,191 @@
+.partners {
+  background-color: var(--color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.partners__description {
+  text-align: center;
+  max-width: 700px;
+  margin: var(--spacing-md) auto var(--spacing-xl);
+  color: var(--color-gray);
+  font-size: var(--font-size-md);
+}
+
+.partners__carousel {
+  position: relative;
+  overflow: hidden;
+  padding: var(--spacing-lg) 0;
+  margin: var(--spacing-xl) 0;
+}
+
+.partners__row {
+  display: flex;
+  gap: var(--spacing-md);
+  position: relative;
+  will-change: transform;
+  cursor: grab;
+}
+
+.partners__row:active {
+  cursor: grabbing;
+}
+
+.partners__row--reverse {
+  margin-top: var(--spacing-xl);
+}
+
+.partner-card {
+  min-width: 250px;
+  height: 200px;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.partner-card__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: var(--spacing-md);
+  transition: all 0.3s ease;
+}
+
+.partner-card__logo img {
+  max-width: 70%;
+  max-height: 70px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.partner-card__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-white);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+  overflow: auto;
+}
+
+.partner-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+}
+
+.partner-card:hover .partner-card__logo img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.partner-card:hover .partner-card__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.partner-card__name {
+  font-size: var(--font-size-lg);
+  color: var(--color-secondary);
+  margin: 0 0 var(--spacing-xs);
+  font-weight: 600;
+}
+
+.partner-card__description {
+  color: var(--color-gray);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-md);
+  flex: 1;
+}
+
+.partner-card__link {
+  display: inline-block;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  transition: color 0.3s ease;
+  align-self: flex-start;
+}
+
+.partner-card__link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.partners__cta {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .partner-card {
+    min-width: 200px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .partner-card {
+    min-width: 180px;
+    height: 160px;
+  }
+
+  .partner-card__logo img {
+    max-height: 60px;
+  }
+
+  .partner-card__name {
+    font-size: var(--font-size-md);
+  }
+
+  .partner-card__description {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 576px) {
+  .partners__description {
+    font-size: var(--font-size-sm);
+  }
+
+  .partner-card {
+    min-width: 150px;
+    height: 140px;
+  }
+
+  .partner-card__logo img {
+    max-height: 50px;
+  }
+
+  .partner-card__content {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Стилизация скроллбара в карточках партнеров */
+.partner-card__content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.partner-card__content::-webkit-scrollbar-track {
+  background: var(--color-light);
+}
+
+.partner-card__content::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+}
