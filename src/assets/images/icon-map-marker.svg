@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="48px" viewBox="0 0 36 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Map Marker</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-8.000000, -2.000000)">
+            <path d="M26,2 C15.5066667,2 8,9.33333333 8,19.5 C8,29.6666667 26,50 26,50 C26,50 44,29.6666667 44,19.5 C44,9.33333333 36.4933333,2 26,2 Z" fill="#149CB8" fill-rule="nonzero"></path>
+            <circle fill="#FFFFFF" cx="26" cy="19" r="7"></circle>
+        </g>
+    </g>
+</svg>

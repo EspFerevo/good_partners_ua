@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import './Contacts.css';
+import markerIcon from '../../assets/images/icon-map-marker.svg';
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,76 @@ const Contacts = () => {
     message: ''
   });
 
+  const [mapCenter, setMapCenter] = useState({
+    lat: 50.4578595,
+    lng: 30.5101344
+  });
+
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [map, setMap] = useState(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [isMapLoading, setIsMapLoading] = useState(true);
+
+  // Map configuration
+  const companyLocation = {
+    address: "ул. Ярославская, 31, офис 25, Киев, 04071",
+    position: { lat: 50.4578595, lng: 30.5101344 },
+    title: "Good Partners UA"
+  };
+
+  const mapOptions = {
+    disableDefaultUI: false,
+    zoomControl: true,
+    streetViewControl: true,
+    mapTypeControl: true,
+    fullscreenControl: true,
+    styles: [
+      {
+        featureType: "all",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#7c93a3" }, { lightness: "-10" }]
+      },
+      {
+        featureType: "administrative.country",
+        elementType: "geometry",
+        stylers: [{ visibility: "on" }]
+      },
+      {
+        featureType: "administrative.country",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#a0a4a5" }]
+      },
+      {
+        featureType: "administrative.province",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#62838e" }]
+      },
+      {
+        featureType: "landscape",
+        elementType: "geometry.fill",
+        stylers: [{ color: "#f5f5f5" }]
+      },
+      {
+        featureType: "water",
+        elementType: "geometry.fill",
+        stylers: [{ color: "#b7d2e5" }]
+      }
+    ]
+  };
+
+  // Custom marker icon
+  const customIcon = {
+    url: markerIcon,
+    scaledSize: { width: 40, height: 40 }
+  };
+
+  // Map container style
+  const containerStyle = {
+    width: '100%',
+    height: '100%'
+  };
+
+  // Handlers
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -56,10 +128,35 @@ const Contacts = () => {
     });
   };
 
+  const handleMarkerClick = useCallback((marker) => {
+    setSelectedMarker(marker);
+  }, []);
+
+  const handleCloseInfoWindow = useCallback(() => {
+    setSelectedMarker(null);
+  }, []);
+
+  const onMapLoad = useCallback((map) => {
+    setMap(map);
+    setMapLoaded(true);
+    setIsMapLoading(false);
+  }, []);
+
+  // Reset focus to marker on map load
+  useEffect(() => {
+    if (mapLoaded && map) {
+      map.panTo(companyLocation.position);
+    }
+  }, [mapLoaded, map]);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
+
+  // API key would normally be stored in environment variables
+  // For demonstration purposes, we use a placeholder/public key
+  const googleMapsApiKey = "AIzaSyAF5zjSU7iBKEr_ftBzrFE_PTpfDzPPc2Y";
 
   return (
     <section className="section contacts" id="contacts">
@@ -210,7 +307,7 @@ const Contacts = () => {
           </motion.div>
         </div>
 
-        {/* Карта */}
+        {/* Интерактивная карта */}
         <motion.div
           className="contacts__map-section"
           initial="hidden"
@@ -221,16 +318,63 @@ const Contacts = () => {
         >
           <h3 className="contacts__map-title">Найти нас на карте</h3>
           <div className="contacts__map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.487346233659!2d30.507945015776596!3d50.45785959543772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce5f23704949%3A0xed02ae379162666c!2z0JrQvtGA0L_Rg9GBIEU!5e0!3m2!1sru!2sua!4v1611312908600!5m2!1sru!2sua"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              aria-hidden="false"
-              tabIndex="0"
-            ></iframe>
+            {isMapLoading && (
+              <div className="map-loading">
+                <span></span>
+              </div>
+            )}
+
+            <LoadScript
+              googleMapsApiKey={googleMapsApiKey}
+              onLoad={() => setIsMapLoading(false)}
+            >
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={mapCenter}
+                zoom={16}
+                options={mapOptions}
+                onLoad={onMapLoad}
+              >
+                <Marker
+                  position={companyLocation.position}
+                  title={companyLocation.title}
+                  onClick={() => handleMarkerClick(companyLocation)}
+                  animation={2} // DROP animation
+                  icon={customIcon}
+                />
+                {selectedMarker && (
+                  <InfoWindow
+                    position={selectedMarker.position}
+                    onCloseClick={handleCloseInfoWindow}
+                  >
+                    <div className="map-info-window">
+                      <h4>{selectedMarker.title}</h4>
+                      <p>{selectedMarker.address}</p>
+                      <div className="map-info-actions">
+                        <a
+                          href={`https://www.google.com/maps/dir/?api=1&destination=${selectedMarker.position.lat},${selectedMarker.position.lng}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="map-direction-link"
+                        >
+                          Проложить маршрут
+                        </a>
+                      </div>
+                    </div>
+                  </InfoWindow>
+                )}
+              </GoogleMap>
+            </LoadScript>
+          </div>
+
+          <div className="contacts__map-actions">
+            <button
+              className="map-action-button"
+              onClick={() => map && map.panTo(companyLocation.position)}
+              aria-label="Сфокусировать карту на нашем офисе"
+            >
+              Показать офис на карте
+            </button>
           </div>
         </motion.div>
       </div>
