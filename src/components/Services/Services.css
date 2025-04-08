@@ -1,0 +1,117 @@
+.services {
+  background-color: var(--color-light);
+}
+
+.services__quote {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-2xl);
+  text-align: center;
+}
+
+.services__quote blockquote {
+  font-size: var(--font-size-xl);
+  color: var(--color-secondary);
+  font-style: italic;
+  position: relative;
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.services__quote blockquote::before,
+.services__quote blockquote::after {
+  content: '"';
+  position: absolute;
+  font-size: var(--font-size-4xl);
+  color: var(--color-primary);
+  opacity: 0.5;
+}
+
+.services__quote blockquote::before {
+  top: -20px;
+  left: 0;
+}
+
+.services__quote blockquote::after {
+  bottom: -40px;
+  right: 0;
+}
+
+.services__quote footer {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-md);
+  color: var(--color-gray);
+  font-style: normal;
+}
+
+.services__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.service-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--transition-normal);
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-card__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.service-card__icon--fast-delivery {
+  background-image: url('../../assets/images/icon-delivery.svg');
+}
+
+.service-card__icon--support {
+  background-image: url('../../assets/images/icon-support.svg');
+}
+
+.service-card__icon--partnership {
+  background-image: url('../../assets/images/icon-partnership.svg');
+}
+
+.service-card__title {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-secondary);
+}
+
+.service-card__description {
+  color: var(--color-gray);
+  font-size: var(--font-size-md);
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .services__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .services__quote blockquote {
+    font-size: var(--font-size-lg);
+  }
+
+  .services__cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .service-card {
+    padding: var(--spacing-lg);
+  }
+}

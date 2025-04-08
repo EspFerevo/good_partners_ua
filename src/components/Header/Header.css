@@ -1,0 +1,124 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--spacing-md) 0;
+  transition: all var(--transition-normal);
+  background-color: transparent;
+}
+
+.header--scrolled {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-sm) 0;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__text {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.header--scrolled .logo__text {
+  color: var(--color-secondary);
+}
+
+.header__nav {
+  display: flex;
+}
+
+.nav__list {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.nav__link {
+  position: relative;
+  font-weight: 500;
+  color: var(--color-secondary);
+  padding: var(--spacing-xs) 0;
+  transition: all var(--transition-normal);
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-normal);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.header__mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+
+.header__mobile-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-secondary);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-normal);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .header__mobile-toggle {
+    display: flex;
+    z-index: 1001;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-lg);
+    transition: right var(--transition-normal);
+    padding: 80px var(--spacing-lg) var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__nav--open {
+    right: 0;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .nav__link {
+    font-size: var(--font-size-lg);
+  }
+}
