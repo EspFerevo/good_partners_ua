@@ -1,4 +1,4 @@
-.social-links {
+/* .social-links {
   position: fixed;
   top: 50%;
   left: 20px;
@@ -61,7 +61,6 @@
   transform: translateX(0);
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .social-links {
     left: 10px;
@@ -103,4 +102,4 @@
   .social-links__tooltip {
     display: none;
   }
-}
+} */

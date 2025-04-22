@@ -11,8 +11,7 @@ import Partners from './components/Partners/Partners';
 import FAQ from './components/FAQ/FAQ';
 import Contacts from './components/Contacts/Contacts';
 import Footer from './components/Footer/Footer';
-import SocialLinks from './components/SocialLinks/SocialLinks';
-import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+// import SocialLinks from './components/SocialLinks/SocialLinks';
 import './styles/global.css';
 
 function App() {
@@ -52,8 +51,7 @@ function App() {
         <Contacts />
       </main>
       <Footer />
-      <SocialLinks />
-      <ThemeToggle />
+      {/* <SocialLinks /> */}
     </>
   );
 }
