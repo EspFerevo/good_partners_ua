@@ -1,44 +1,44 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import './Calculator.css';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import "./Calculator.css";
 
 const Calculator = () => {
   // Данные продуктов и цен
   const productCategories = [
     {
       id: 1,
-      name: 'Органические растворители',
+      name: "Органические растворители",
       products: [
-        { id: 101, name: 'Ацетон', price: 89, unit: 'л' },
-        { id: 102, name: 'Толуол', price: 110, unit: 'л' },
-        { id: 103, name: 'Этилацетат', price: 95, unit: 'л' },
-        { id: 104, name: 'Изопропиловый спирт', price: 78, unit: 'л' }
-      ]
+        { id: 101, name: "Ацетон", price: 89, unit: "л" },
+        { id: 102, name: "Толуол", price: 110, unit: "л" },
+        { id: 103, name: "Этилацетат", price: 95, unit: "л" },
+        { id: 104, name: "Изопропиловый спирт", price: 78, unit: "л" },
+      ],
     },
     {
       id: 2,
-      name: 'Неорганические кислоты',
+      name: "Неорганические кислоты",
       products: [
-        { id: 201, name: 'Серная кислота', price: 125, unit: 'л' },
-        { id: 202, name: 'Соляная кислота', price: 85, unit: 'л' },
-        { id: 203, name: 'Азотная кислота', price: 140, unit: 'л' }
-      ]
+        { id: 201, name: "Серная кислота", price: 125, unit: "л" },
+        { id: 202, name: "Соляная кислота", price: 85, unit: "л" },
+        { id: 203, name: "Азотная кислота", price: 140, unit: "л" },
+      ],
     },
     {
       id: 3,
-      name: 'Полимерные материалы',
+      name: "Полимерные материалы",
       products: [
-        { id: 301, name: 'Полиэтилен', price: 210, unit: 'кг' },
-        { id: 302, name: 'Полипропилен', price: 245, unit: 'кг' },
-        { id: 303, name: 'Поливинилхлорид', price: 180, unit: 'кг' }
-      ]
-    }
+        { id: 301, name: "Полиэтилен", price: 210, unit: "кг" },
+        { id: 302, name: "Полипропилен", price: 245, unit: "кг" },
+        { id: 303, name: "Поливинилхлорид", price: 180, unit: "кг" },
+      ],
+    },
   ];
 
   const deliveryOptions = [
-    { id: 1, name: 'Самовывоз', price: 0 },
-    { id: 2, name: 'Доставка по Киеву', price: 500 },
-    { id: 3, name: 'Доставка по Украине', price: 1200 }
+    { id: 1, name: "Самовывоз", price: 0 },
+    { id: 2, name: "Доставка по Киеву", price: 500 },
+    { id: 3, name: "Доставка по Украине", price: 1200 },
   ];
 
   // Состояния
@@ -62,14 +62,18 @@ const Calculator = () => {
 
   // Обработчики событий
   const handleCategoryChange = (categoryId) => {
-    const category = productCategories.find(cat => cat.id === Number(categoryId));
+    const category = productCategories.find(
+      (cat) => cat.id === Number(categoryId)
+    );
     setSelectedCategory(category);
     setSelectedProduct(null);
     setShowResult(false);
   };
 
   const handleProductChange = (productId) => {
-    const product = selectedCategory.products.find(prod => prod.id === Number(productId));
+    const product = selectedCategory.products.find(
+      (prod) => prod.id === Number(productId)
+    );
     setSelectedProduct(product);
     setShowResult(false);
   };
@@ -81,7 +85,9 @@ const Calculator = () => {
   };
 
   const handleDeliveryChange = (deliveryId) => {
-    const delivery = deliveryOptions.find(opt => opt.id === Number(deliveryId));
+    const delivery = deliveryOptions.find(
+      (opt) => opt.id === Number(deliveryId)
+    );
     setSelectedDelivery(delivery);
     setShowResult(false);
   };
@@ -93,7 +99,7 @@ const Calculator = () => {
   // Анимации
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   const resultAnimation = {
@@ -101,8 +107,8 @@ const Calculator = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { type: 'spring', stiffness: 100, damping: 10 }
-    }
+      transition: { type: "spring", stiffness: 100, damping: 10 },
+    },
   };
 
   return (
@@ -138,14 +144,18 @@ const Calculator = () => {
           <div className="calculator__form">
             <div className="calculator__row">
               <div className="calculator__form-group">
-                <label className="calculator__label">Категория продукции:</label>
+                <label className="calculator__label">
+                  Категория продукции:
+                </label>
                 <select
                   className="calculator__select"
                   onChange={(e) => handleCategoryChange(e.target.value)}
-                  value={selectedCategory?.id || ''}
+                  value={selectedCategory?.id || ""}
                 >
-                  <option value="" disabled>Выберите категорию</option>
-                  {productCategories.map(category => (
+                  <option value="" disabled>
+                    Выберите категорию
+                  </option>
+                  {productCategories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
                     </option>
@@ -161,10 +171,12 @@ const Calculator = () => {
                   <select
                     className="calculator__select"
                     onChange={(e) => handleProductChange(e.target.value)}
-                    value={selectedProduct?.id || ''}
+                    value={selectedProduct?.id || ""}
                   >
-                    <option value="" disabled>Выберите продукт</option>
-                    {selectedCategory.products.map(product => (
+                    <option value="" disabled>
+                      Выберите продукт
+                    </option>
+                    {selectedCategory.products.map((product) => (
                       <option key={product.id} value={product.id}>
                         {product.name} ({product.price} грн/{product.unit})
                       </option>
@@ -177,13 +189,17 @@ const Calculator = () => {
             {selectedProduct && (
               <div className="calculator__row">
                 <div className="calculator__form-group">
-                  <label className="calculator__label">Количество ({selectedProduct.unit}):</label>
+                  <label className="calculator__label">
+                    Количество ({selectedProduct.unit}):
+                  </label>
                   <input
                     type="number"
                     min="1"
                     className="calculator__input"
                     value={quantity}
-                    onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
+                    onChange={(e) =>
+                      handleQuantityChange(parseInt(e.target.value))
+                    }
                   />
                 </div>
               </div>
@@ -198,9 +214,12 @@ const Calculator = () => {
                     onChange={(e) => handleDeliveryChange(e.target.value)}
                     value={selectedDelivery.id}
                   >
-                    {deliveryOptions.map(option => (
+                    {deliveryOptions.map((option) => (
                       <option key={option.id} value={option.id}>
-                        {option.name} {option.price > 0 ? `(${option.price} грн)` : '(бесплатно)'}
+                        {option.name}{" "}
+                        {option.price > 0
+                          ? `(${option.price} грн)`
+                          : "(бесплатно)"}
                       </option>
                     ))}
                   </select>
@@ -220,7 +239,6 @@ const Calculator = () => {
               </div>
             )}
           </div>
-
           {showResult && (
             <motion.div
               className="calculator__result"
@@ -232,36 +250,66 @@ const Calculator = () => {
               <div className="calculator__result-items">
                 <div className="calculator__result-item">
                   <span className="calculator__result-label">Продукт:</span>
-                  <span className="calculator__result-value">{selectedProduct.name}</span>
+                  <span className="calculator__result-value">
+                    {selectedProduct.name}
+                  </span>
                 </div>
                 <div className="calculator__result-item">
-                  <span className="calculator__result-label">Цена за единицу:</span>
-                  <span className="calculator__result-value">{selectedProduct.price} грн/{selectedProduct.unit}</span>
+                  <span className="calculator__result-label">
+                    Цена за единицу:
+                  </span>
+                  <span className="calculator__result-value">
+                    {selectedProduct.price} грн/{selectedProduct.unit}
+                  </span>
                 </div>
                 <div className="calculator__result-item">
                   <span className="calculator__result-label">Количество:</span>
-                  <span className="calculator__result-value">{quantity} {selectedProduct.unit}</span>
+                  <span className="calculator__result-value">
+                    {quantity} {selectedProduct.unit}
+                  </span>
                 </div>
                 <div className="calculator__result-item">
-                  <span className="calculator__result-label">Стоимость товара:</span>
-                  <span className="calculator__result-value">{selectedProduct.price * quantity} грн</span>
+                  <span className="calculator__result-label">
+                    Стоимость товара:
+                  </span>
+                  <span className="calculator__result-value">
+                    {selectedProduct.price * quantity} грн
+                  </span>
                 </div>
                 <div className="calculator__result-item">
-                  <span className="calculator__result-label">Способ доставки:</span>
-                  <span className="calculator__result-value">{selectedDelivery.name}</span>
+                  <span className="calculator__result-label">
+                    Способ доставки:
+                  </span>
+                  <span className="calculator__result-value">
+                    {selectedDelivery.name}
+                  </span>
                 </div>
                 <div className="calculator__result-item">
-                  <span className="calculator__result-label">Стоимость доставки:</span>
-                  <span className="calculator__result-value">{selectedDelivery.price} грн</span>
+                  <span className="calculator__result-label">
+                    Стоимость доставки:
+                  </span>
+                  <span className="calculator__result-value">
+                    {selectedDelivery.price} грн
+                  </span>
                 </div>
                 <div className="calculator__result-item calculator__result-item--total">
-                  <span className="calculator__result-label">Итоговая стоимость:</span>
-                  <span className="calculator__result-value calculator__result-value--total">{totalPrice} грн</span>
+                  <span className="calculator__result-label">
+                    Итоговая стоимость:
+                  </span>
+                  <span className="calculator__result-value calculator__result-value--total">
+                    {totalPrice} грн
+                  </span>
                 </div>
               </div>
               <div className="calculator__note">
-                <p>Обратите внимание: данный расчет является приблизительным. Для получения точной информации, пожалуйста, свяжитесь с нашими менеджерами.</p>
-                <a href="#contacts" className="calculator__cta">Оформить заказ</a>
+                <p>
+                  Обратите внимание: данный расчет является приблизительным. Для
+                  получения точной информации, пожалуйста, свяжитесь с нашими
+                  менеджерами.
+                </p>
+                <a href="#contacts" className="calculator__cta">
+                  Оформить заказ
+                </a>
               </div>
             </motion.div>
           )}

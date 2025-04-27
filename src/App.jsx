@@ -4,7 +4,7 @@ import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Counters from './components/Counters/Counters';
 import Products from './components/Products/Products';
-import Calculator from './components/Calculator/Calculator';
+// import Calculator from './components/Calculator/Calculator';
 import Services from './components/Services/Services';
 import Testimonials from './components/Testimonials/Testimonials';
 import Partners from './components/Partners/Partners';
@@ -43,7 +43,7 @@ function App() {
         <About />
         <Counters />
         <Products />
-        <Calculator />
+        {/* <Calculator /> */}
         <Services />
         <Testimonials />
         <Partners />
